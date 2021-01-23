@@ -24,8 +24,11 @@ int main()
 
 	cout << endl;
 
-	for (int i = 0; i <= 10; i = i + 1)
+	while (true)
 	{
+		int i = 0;
+		int i = i + 1;
+
 		//Draw Board
 		cout << "-----------" << endl;
 		cout << " " << board[0] << " | " << board[1] << " | " << board[2] << endl;
@@ -34,30 +37,39 @@ int main()
 		cout << "-----------" << endl;
 		cout << " " << board[6] << " | " << board[7] << " | " << board[8] << endl;
 		cout << "-----------" << endl;
-
-		//Choose Mark
-		if (i % 2 == 0)
+		
+		bool moved = false;
+		//Get Mark
+		while (moved != true)
 		{
-			cout << "move X: ";		cin >> move;
+			if (i % 2 == 0)
+			{
+				cout << "move X: ";		cin >> move;
 
-			if (board[move - 1] == ' ')
-				board[move - 1] = 'X';
+				if (board[move - 1] == ' ')
+				{
+					board[move - 1] = 'X'; moved = true;
+				}
+				else
+					cout << "\nInvalid!" << endl;
+			}
 			else
-				cout << "\nInvalid!" << endl;
-		}
-		else
-		{
-			cout << "move O: ";		cin >> move;
+			{
+				cout << "move O: ";		cin >> move;
 
-			if (board[move - 1] == ' ')
-				board[move - 1] = 'O';
-			else
-				cout << "\nInvalid!" << endl;
+				if (board[move - 1] == ' ')
+				{
+					board[move - 1] = 'O'; moved = true;
+				}
+
+				else
+					cout << "\nInvalid!" << endl;
+			}
 		}
+
 		system("cls||clear");
-
-		//check win
-			//check horizantals
+	//check win:
+		//check horizantals
 		if (board[0] == board[1] && board[1] == board[2] && board[0] != ' ')
 		{ cout << endl << board[0] << " Is WIN!" << endl; break; }
 		if (board[3] == board[4] && board[4] == board[5] && board[3] != ' ')
@@ -78,10 +90,6 @@ int main()
 		{ cout << endl << board[0] << " Is WIN!" << endl; break; }
 		if (board[2] == board[4] && board[4] == board[6] && board[2] != ' ')
 		{ cout << endl << board[2] << " Is WIN!" << endl; break; }
-
-		//Check for Draw
-		if (i == 9)
-		{ cout << endl << "Draw!" << endl; break; }
 	}
 
 	//Draw Board for demo results
@@ -94,14 +102,17 @@ int main()
 	cout << "-----------" << endl;
 
 	//restart game
-	bool restart;
+	int restart;
 	cout << "restart? (1 - yes): ";		cin >> restart;
 
-	if (restart)
+	if (restart == 1)
 	{
 		system("cls||clear");
 		main();
 	}
 	else
+	{
+		system("PAUSE");
 		return 0;
+	}
 }
